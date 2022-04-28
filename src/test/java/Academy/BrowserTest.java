@@ -17,13 +17,16 @@ public class BrowserTest {
 	public void getData()
 	{
 		System.out.println("Hello Guys");
-		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-		WebDriver driver =new ChromeDriver();
-		driver.get("https://rahylshettyacademy.azurewebsites.net/webapp/");
-		String text =driver.findElement(By.cssSelector("h1")).getText();
-		System.out.println(text);
-		Assert.assertTrue(text.equalsIgnoreCase("shiv sahil guleri"));
-		driver.close();
+// 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+// 		WebDriver driver =new ChromeDriver();
+// 		driver.get("https://astaticwebstite.azurewebsites.net/webapp/");
+// 		String text =driver.findElement(By.cssSelector("h1")).getText();
+// 		System.out.println(text);
+// 		Assert.assertTrue(text.equalsIgnoreCase("shiv sahil guleri"));
+// 		driver.close();
+		
+		GetMethod getMethod = new GetMethod("https://astaticwebstite.azurewebsites.net/webapp/");
+                int res = client.executeMethod(getMethod);
 	
 		
 		

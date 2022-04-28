@@ -25,8 +25,8 @@ public class BrowserTest {
 // 		Assert.assertTrue(text.equalsIgnoreCase("shiv sahil guleri"));
 // 		driver.close();
 		
-		GetMethod getMethod = new GetMethod("https://astaticwebstite.azurewebsites.net/webapp/");
-                int res = client.executeMethod(getMethod);
+// 		GetMethod getMethod = new GetMethod("https://astaticwebstite.azurewebsites.net/webapp/");
+//                 int res = client.executeMethod(getMethod);
 	
 		
 		

@@ -1,0 +1,116 @@
+<html>
+<head>
+<title>TestNG:  execution done using mvn command</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>execution done using mvn command</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>0/3/0</td>
+</tr><tr>
+<td>Started on:</td><td>Fri Jun 20 10:43:42 IST 2025</td>
+</tr>
+<tr><td>Total time:</td><td>7 seconds (7225 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='runner.ReRunTestRunner.runScenario()'><b>runScenario</b><br>Test class: runner.ReRunTestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "sceario 1", "Title of your feature"</td>
+<td><div><pre>java.lang.NullPointerException: Cannot invoke &quot;com.aventstack.extentreports.ExtentReports.createTest(String)&quot; because &quot;report.ExtentFactory.report&quot; is null
+	at report.ExtentFactory.createOrGetTest(ExtentFactory.java:53)
+	at hooks.ApplicationHooks.beforeScenarios(ApplicationHooks.java:35)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1664664461", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1664664461'><pre>java.lang.NullPointerException: Cannot invoke &quot;com.aventstack.extentreports.ExtentReports.createTest(String)&quot; because &quot;report.ExtentFactory.report&quot; is null
+	at report.ExtentFactory.createOrGetTest(ExtentFactory.java:53)
+	at hooks.ApplicationHooks.beforeScenarios(ApplicationHooks.java:35)
+</pre></div></td>
+<td>6</td>
+<td>runner.ReRunTestRunner@2d1b1423</td></tr>
+<tr>
+<td title='runner.ReRunTestRunner.runScenario()'><b>runScenario</b><br>Test class: runner.ReRunTestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "sceario 2", "Title of your feature"</td>
+<td><div><pre>java.lang.NullPointerException: Cannot invoke &quot;com.aventstack.extentreports.ExtentReports.createTest(String)&quot; because &quot;report.ExtentFactory.report&quot; is null
+	at report.ExtentFactory.createOrGetTest(ExtentFactory.java:53)
+	at hooks.ApplicationHooks.beforeScenarios(ApplicationHooks.java:35)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1092410839", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1092410839'><pre>java.lang.NullPointerException: Cannot invoke &quot;com.aventstack.extentreports.ExtentReports.createTest(String)&quot; because &quot;report.ExtentFactory.report&quot; is null
+	at report.ExtentFactory.createOrGetTest(ExtentFactory.java:53)
+	at hooks.ApplicationHooks.beforeScenarios(ApplicationHooks.java:35)
+</pre></div></td>
+<td>6</td>
+<td>runner.ReRunTestRunner@2d1b1423</td></tr>
+<tr>
+<td title='runner.ReRunTestRunner.runScenario()'><b>runScenario</b><br>Test class: runner.ReRunTestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "sceario 3", "Title of your feature"</td>
+<td><div><pre>java.lang.NullPointerException: Cannot invoke &quot;com.aventstack.extentreports.ExtentReports.createTest(String)&quot; because &quot;report.ExtentFactory.report&quot; is null
+	at report.ExtentFactory.createOrGetTest(ExtentFactory.java:53)
+	at hooks.ApplicationHooks.beforeScenarios(ApplicationHooks.java:35)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1029085261", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1029085261'><pre>java.lang.NullPointerException: Cannot invoke &quot;com.aventstack.extentreports.ExtentReports.createTest(String)&quot; because &quot;report.ExtentFactory.report&quot; is null
+	at report.ExtentFactory.createOrGetTest(ExtentFactory.java:53)
+	at hooks.ApplicationHooks.beforeScenarios(ApplicationHooks.java:35)
+</pre></div></td>
+<td>6</td>
+<td>runner.ReRunTestRunner@2d1b1423</td></tr>
+</table><p>
+</body>
+</html>

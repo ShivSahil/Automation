@@ -48,7 +48,7 @@ public class ExtentFactory {
 		report.attachReporter(reporter); 
 		// name of the tester and environment is harcoded to my name. But I can easily replace with them with data from config.properties
 		report.setSystemInfo("Automation Tester", "Shiv Sahil Guleri");
-		report.setSystemInfo("Contact Details", "8209060559");
+		report.setSystemInfo("Contact Details", "+91 8209060559");
 
 	}
 

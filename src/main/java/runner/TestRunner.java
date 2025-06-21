@@ -30,7 +30,7 @@ public class TestRunner extends AbstractTestNGCucumberTests {
 	@BeforeSuite(alwaysRun = true)
     public void setUpClass() {
 		// instead of passing the cucumber.filter.tags on @cucumbeOptions(tags =  "@individualTag") I am setting it here.
-		//because I need to set it via config.properties
+		// because I need to set it via config.properties
         prop = ConfigurationManager.init_prop();
         String tagFromProp = prop.getProperty("cucumberTag");
         System.setProperty("cucumber.filter.tags", tagFromProp); 

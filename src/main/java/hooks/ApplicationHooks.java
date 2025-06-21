@@ -28,13 +28,17 @@ public class ApplicationHooks {
 	public static ThreadLocal<String> tScenarioName = new ThreadLocal<>();
 
 	// I have not used testng dependency but rather using cucumber-testng dependency
-	// below instead of priority I am using order as @Before annotation came from
-	// cucumber-java not testNG!!!
+	// below instead of "priority" I am using "order" as @Before annotation came from  cucumber-java not testNG!!!
+
 	@Before(order = 1)
 	public void beforeScenarios(Scenario scenario) {
-	    ExtentTest test = ExtentFactory.createOrGetTest(scenario.getName());
-	    ExtentFactory.getInstance().setExtentTest(test);
-	}	
+		//ExtentTest test = ExtentFactory.getReport().createTest(scenario.getName());
+		
+		 ExtentTest test = ExtentFactory.createOrGetTest(scenario.getName());
+		
+		ExtentFactory.getInstance().setExtentTest(test);
+
+	}
 
 	@Before(order = 2)
 	public void setUpProperty() {
@@ -42,8 +46,7 @@ public class ApplicationHooks {
 	}
 
 	@Before(order = 3)
-	public void getScenarioName(Scenario senario) {
-		/// I can use this in excel in future
+	public void getScenarioName(Scenario senario) { /// I can use this in excel in future
 		scenarioName = senario.getName();
 		tScenarioName.set(scenarioName);
 	}
@@ -55,20 +58,18 @@ public class ApplicationHooks {
 		if (prop.getProperty("enableChromeDebugger").equalsIgnoreCase("yes")) {
 
 			driver = browserfactory.init_driver("ChromeDebugger");
-		} else {
-			// Fetch the browser parameter from testng.xml. our testNG is created on Run time in ReRunUtility class
-			// note: you could have retrieved the value from using System.getProperty("browser1"); also
+		} else { // Fetch the browser parameter from testng.xml. our testNG is created on Run  time in ReRunUtility class
+			// note: you could have retrieved the value from using  System.getProperty("browser1"); also
 			String browserName = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest()
 					.getParameter("browser");
 
-			// Check if the browserName value is null OR the browserName did not get replaced by maven (e.g. -Dbrowser1=chrome) then retrieve value from config file
+			// if the browserName value is null then retrieve value from config file
 			if (browserName == null || browserName.equalsIgnoreCase("${browser1}")) {
 				browserName = prop.getProperty("browser");
 			}
 			driver = browserfactory.init_driver(browserName);
 			ExtentFactory.getInstance().getExtentTest().log(Status.PASS, "Scenario is running on: " + browserName);
-			
-			
+
 		}
 	}
 
@@ -86,23 +87,25 @@ public class ApplicationHooks {
 	}
 
 	@After(order = 1)
-	public void afterScenario(Scenario scenario) throws IOException {
-	    String scenarioName = scenario.getName();
+	public void afterScenario(Scenario scenario) throws IOException { 
+		// Assign tags from feature file to Extent Report
+		if (!scenario.getSourceTagNames().isEmpty()) {
+			ExtentFactory.getInstance().getExtentTest()
+					.assignCategory(scenario.getSourceTagNames().toArray(new String[0]));
+		}
 
-	    // Assign tags
-	    if (!scenario.getSourceTagNames().isEmpty()) {
-	        ExtentFactory.getInstance().getExtentTest()
-	                .assignCategory(scenario.getSourceTagNames().toArray(new String[0]));
-	    }
+		if (scenario.isFailed()) {
+			Screenshot.takeScreenShot(driver, scenario);
+			ExtentFactory.markFailed(scenarioName);
+		}
 
-	    if (scenario.isFailed()) {
-	        Screenshot.takeScreenShot(driver, scenario);
-	        ExtentFactory.markFailed(scenarioName);
-	    } else {
-	        ExtentFactory.markPassed(scenarioName);
-	    }
+		else {
+			ExtentFactory.markPassed(scenarioName);
+			//ExtentFactory.getInstance().getExtentTest().log(Status.PASS, "SCENARIO COMPLETE");
+		}
 
-	    ExtentFactory.getReport().flush();
+		// if your report doesnot flush then you will not see screenshot and no tags on the scenario
+		ExtentFactory.getReport().flush();
 	}
 
 }

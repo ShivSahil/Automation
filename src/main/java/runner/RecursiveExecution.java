@@ -13,7 +13,7 @@ public class RecursiveExecution {
 
 	public static void main(String[] arg) {
 
-		// reRunFailedScenario is coming from mvn command
+		// here sreRunFailedScenario is coming from mvn command
 		String reRunFailedScenarioProperty = System.getProperty("reRunFailedScenario");
 		
 		// in case reRunFailedScenario is not retrieved from mvn then values for reRunFailedScenario picked from config.properties

@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite parallel="tests" data-provider-thread-count="5" name="Failed suite [TestNG Suite]">
-  <test thread-count="5" parallel="tests" name="execution done using mvn command(failed)">
+  <test thread-count="5" parallel="tests" name="execution NOT done using mvn command(failed)">
     <classes>
-      <class name="runner.ReRunTestRunner">
+      <class name="runner.TestRunner">
         <methods>
           <include name="setUpClass"/>
           <include name="tearDown"/>
-          <include name="runScenario" invocation-numbers="0 1 2"/>
+          <include name="runScenario" invocation-numbers="0 2"/>
           <include name="tearDownClass"/>
+          <include name="setUpClass"/>
         </methods>
-      </class> <!-- runner.ReRunTestRunner -->
+      </class> <!-- runner.TestRunner -->
     </classes>
-  </test> <!-- execution done using mvn command(failed) -->
+  </test> <!-- execution NOT done using mvn command(failed) -->
 </suite> <!-- Failed suite [TestNG Suite] -->

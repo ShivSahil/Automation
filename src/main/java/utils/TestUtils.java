@@ -10,14 +10,28 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
+import Pages.CommonPage;
 import logging.WrappedReportLogger;
 
 public class TestUtils {
-	// My invention; these @field lets you get data on demand directly on feature file************************************************
 	
-	//Note: I have not implemented method like dateComparison, findDifferenceBetweenDate, **htmlTable** etc etc. Since I had less time
+	
+	
+	// My invention; setting variables in feature file directly************************************************
+	
+	
+	public static String resolveDynamicVariableIfNeeded(String key) {
+	    if (key != null && key.startsWith("var_") && !key.contains("=@")) {
+	        String dynamicVal = CommonPage.getThreadSafeMap().get(key);
+	        if (dynamicVal != null) {
+	            return dynamicVal.toString();
+	        } else {
+	            throw new RuntimeException("Dynamic variable '" + key + "' not found in ThreadLocal map.");
+	        }
+	    }
+	    return key;
+	}
 
-	// a lot of code written down below is copied from internet since it's easy available online and I was under time crunch!
 	
 	
 	// Method return any String $95,245.50 as 95245.50 in BigDecimal Format
@@ -34,6 +48,7 @@ public class TestUtils {
 		}
 	}
 	
+	// My invention; these @field lets you get data on demand directly on feature file************************************************
 	
 	// example use in feature file:
 	// @randomNumber1till99
@@ -237,6 +252,11 @@ public class TestUtils {
 	}
 
 	
+	
+	//Note: I have not implemented method like dateComparison, findDifferenceBetweenDate, **htmlTable** etc etc. Since I had less time
+
+    // a lot of code written down below is copied from internet since it's easy available online and I was under time crunch!
+		
 
 
 }

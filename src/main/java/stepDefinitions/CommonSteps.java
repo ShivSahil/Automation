@@ -1,10 +1,15 @@
 package stepDefinitions;
 
+import Pages.CommonPage;
+import driver.BrowserFactory;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
+import logging.WrappedReportLogger;
 import utils.SeleniumUtils;
 
 public class CommonSteps {
 	
+	CommonPage commonPage= new CommonPage(BrowserFactory.getDriver());
 	
 	// i have skipped common steps like entering credentials,clicking on actions button, delete button etc etc
 	
@@ -14,5 +19,13 @@ public class CommonSteps {
 	public void log_comment_to_extent_report(String comment) {
         SeleniumUtils.extentReportComment(comment, "RoyalBlue");
     }
+	
+	
+	@When("user retrieve {string} field on {string} page and save in dynamic variable {string}")
+	public void user_retrieve_field_on_page_and_save_in_dynamic_variable(String fieldName, String PageName, String variableName) {
+		WrappedReportLogger.trace("user retrieving "+fieldName+" field on "+PageName+" page and save in dynamic variable "+variableName+".....");
+	    commonPage.getRequiredFieldValue( fieldName,  PageName,  variableName);
+		WrappedReportLogger.trace("user retrieved "+fieldName+" field on "+PageName+" page and save in dynamic variable "+variableName+"!!!!!");
+	}
 
 }

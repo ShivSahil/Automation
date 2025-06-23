@@ -81,34 +81,40 @@ public class SeleniumUtils {
 			}
 			else if(textValue.equalsIgnoreCase("@currentUser")) {
 				element.clear();
-				element.sendKeys(prop.getProperty("user"));
+				textValue=prop.getProperty("user");
+				element.sendKeys(textValue);
 			}
 			else if(textValue.toLowerCase().contains("@randomnumber")) {
 				element.clear();
 				int min=TestUtils.extractRangeFromRandomNumber(textValue)[0];
 				int max=TestUtils.extractRangeFromRandomNumber(textValue)[1];
-				element.sendKeys(Integer.toString(TestUtils.getRandomNumberInRange(min, max)));
+				textValue=Integer.toString(TestUtils.getRandomNumberInRange(min, max));
+				element.sendKeys(textValue);
 			}
 			
 			else if (textValue.matches(".*@(?i)(today|yesterday|tomorrow)DateIn[A-Za-z0-9]+.*")) {
 				element.clear();
 				String[] result = TestUtils.extractDateAndFormat(textValue);
-				element.sendKeys(TestUtils.getFormattedDate(result[0],result[1]));
+				textValue=TestUtils.getFormattedDate(result[0],result[1]);
+				element.sendKeys(textValue);
 			}
 			
 			else if(textValue.toLowerCase().contains("@randomfirstname")) {
 				element.clear();
-				element.sendKeys(TestUtils.generateRandomFirstName());
+				textValue=TestUtils.generateRandomFirstName();
+				element.sendKeys(textValue);
 			}
 			
 			else if(textValue.toLowerCase().contains("@randomlastname")) {
 				element.clear();
-				element.sendKeys(TestUtils.generateRandomLastName());
+				textValue=TestUtils.generateRandomLastName();
+				element.sendKeys(textValue);
 			}
 			
 			else if (textValue.matches("@randomDateFrom.+Till.+In.+")) {
 				String [] str=TestUtils.extractStartAndEndDatesAndFormat(textValue);
-				element.sendKeys(TestUtils.getFormattedRandomDate(str[0], str[1], str[2]));
+				textValue=TestUtils.getFormattedRandomDate(str[0], str[1], str[2]);
+				element.sendKeys(textValue);
 			}
 			
 //			else if (textValue.equalsIgnoreCase("@sendNoAdditionalData")) {
@@ -219,7 +225,7 @@ public class SeleniumUtils {
 			Assert.fail("Unable to retrieved text of field '" + fieldName + "' with locator '" + locator + "'");
 
 		}
-		return text;
+		return text.trim();
 	}
 
 	public static boolean isDisplayed(WebDriver driver, By locator, String value, int timeout, String fieldName) {
@@ -274,7 +280,8 @@ public class SeleniumUtils {
 	// My invention or rather an idea which lets you add comments to feature file and extent report***********************************************
 	public static String extentReportComment(String message, String color) {
 		String modifiedString = "<span style='border: 1px solid white;background-color:" + color + ";'>" + message
-				+ "</span>";
+				+ "</span>";		
+		ExtentFactory.getInstance().getExtentTest().log(Status.PASS,"COMMENT:"+modifiedString.toUpperCase());
 		return modifiedString;
 	}
 

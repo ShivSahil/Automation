@@ -56,7 +56,7 @@ public class WrappedAssert {
 	}
 	
 	
-	public static void assertValidationEquals(Object actual, Object expected, String message) {
+	public static void assertEquals(Object actual, Object expected, String message) {
 		try {
 			
 			if(expected == null || expected.equals("")) {

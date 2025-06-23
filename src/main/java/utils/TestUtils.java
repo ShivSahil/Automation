@@ -20,12 +20,13 @@ public class TestUtils {
 	// My invention; setting variables in feature file directly************************************************
 	
 	
-	public static String resolveDynamicVariableIfNeeded(String key) {
+	public static String resolveDynamicVariableIfNeeded(String key) {   // validating if variables(var_AccountTypeOnAccountDetails) or simple data is send in feature file
 	    if (key != null && key.startsWith("var_") && !key.contains("=@")) {
 	        String dynamicVal = CommonPage.getThreadSafeMap().get(key);
-	        if (dynamicVal != null) {
+	        if (dynamicVal != null) {   // if variable is found then return the value
 	            return dynamicVal.toString();
 	        } else {
+	        	WrappedReportLogger.error("Dynamic variable '" + key + "' not found in ThreadLocal map.");
 	            throw new RuntimeException("Dynamic variable '" + key + "' not found in ThreadLocal map.");
 	        }
 	    }

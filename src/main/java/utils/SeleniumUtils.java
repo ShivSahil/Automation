@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.List;
 import java.util.Properties;
 
 import org.openqa.selenium.By;
@@ -25,7 +26,7 @@ public class SeleniumUtils {
 	// Since i was short on time. I have not wrote: select by visible Text, Select by Index, getCheckBoxStatus, waitForPageLoadElementToDisappear
 	// setRadioboxStatus, getRadoboxStatus
 	// isEnabled, isElementAvailable, getAttribute, getTagName, getDropDownOptions,
-	// getTextBoxValue, size, hoverAndClick etc etc
+	// getTextBoxValue, hoverAndClick etc etc
 	
 	private static Properties prop = ConfigurationManager.init_prop();
 
@@ -46,7 +47,8 @@ public class SeleniumUtils {
 
 	public static WebElement getElement(WebDriver driver, By locator, int timeout, String fieldName) {
 		try {
-			return new WebDriverWait(driver, timeout).until(ExpectedConditions.elementToBeClickable(locator));
+			//return new WebDriverWait(driver, timeout).until(ExpectedConditions.elementToBeClickable(locator));
+			return new WebDriverWait(driver, timeout).until(ExpectedConditions.visibilityOfElementLocated(locator));
 		} catch (Exception e) {
 			WrappedReportLogger.error("Unable to find '" + fieldName + "' with locator '" + locator + "'");
 			Assert.fail("Unable to find '" + fieldName + "' with locator '" + locator + "'");
@@ -75,7 +77,7 @@ public class SeleniumUtils {
 			WebElement element = getElement(driver, locator, timeOut, fieldName);
 			highlighterMethod(driver, element);
 			
-			// My invention; these @field lets you get data on demand directly on feature file************************************************
+			// My innovation; these @field lets you get data on demand directly on feature file************************************************
 			if(textValue.equalsIgnoreCase("@clearOut")) {
 				element.clear();
 			}
@@ -180,7 +182,7 @@ public class SeleniumUtils {
 
 	}
 	
-	 // My invention  that intelligently selects or deselects a checkbox only if its current state differs from the desired one — ensuring no redundant actions are performed.
+	 // My innovation  that intelligently selects or deselects a checkbox only if its current state differs from the desired one — ensuring no redundant actions are performed.
 	//************************************************
 	   
 	public static void checkBoxElementAction(WebDriver driver, By locator, String fieldName, int timeOut, String inputValue) {
@@ -276,8 +278,31 @@ public class SeleniumUtils {
 			return attributeValue;
 			
 	}
+	
+	public static String getTagName(WebDriver driver, By locator, int timeOut, String fieldName) {
+		String tagName=null;
+			try {
+				tagName= getElement(driver, locator, timeOut, fieldName).getTagName();
+			}
+	    catch (Exception e) {
+			WrappedReportLogger.error(
+					"Unable to get tagName of field '"+fieldName+"' with locator '" + locator + "'");
+			Assert.fail("Unable to get tagName of field '"+fieldName+"' with locator '" + locator + "'");
+		}
+			
+			return tagName;
+			
+	}
+	
+	
+	public static int size(WebDriver driver, By locator, String fieldName) {
+		// since size never throws the exception so no try-cactch used
+			List<WebElement> locatorSize= driver.findElements(locator);
+			WrappedReportLogger.debug("Total number of instance found for '"+fieldName+"' is '"+locatorSize.size()+"'");
+			return locatorSize.size();
+	}
 
-	// My invention or rather an idea which lets you add comments to feature file and extent report***********************************************
+	// My innovation or rather an idea which lets you add comments to feature file and extent report***********************************************
 	public static String extentReportComment(String message, String color) {
 		String modifiedString = "<span style='border: 1px solid white;background-color:" + color + ";'>" + message
 				+ "</span>";		

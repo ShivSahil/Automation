@@ -17,7 +17,7 @@ public class TestUtils {
 	
 	
 	
-	// My invention; setting variables in feature file directly************************************************
+	// My innovation; setting variables in feature file directly************************************************
 	
 	
 	public static String resolveDynamicVariableIfNeeded(String key) {   // validating if variables(var_AccountTypeOnAccountDetails) or simple data is send in feature file
@@ -49,7 +49,7 @@ public class TestUtils {
 		}
 	}
 	
-	// My invention; these @field lets you get data on demand directly on feature file************************************************
+	// My innovation; these @field lets you get data on demand directly on feature file************************************************
 	
 	// example use in feature file:
 	// @randomNumber1till99

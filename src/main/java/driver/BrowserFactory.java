@@ -30,7 +30,7 @@ public class BrowserFactory {
 			setChromeDriver();
 			getDriver().manage().deleteAllCookies();
 		}
-		// My invention which lets you run from middle of feature file************************************************
+		// My innovation which lets you run from middle of feature file************************************************
 		else if (browser.equalsIgnoreCase("ChromeDebugger")) {
 			setChromeDebuggerDriver();
 		} 

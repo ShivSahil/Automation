@@ -70,7 +70,7 @@ public class ExtentFactory {
 		return report;
 	}
 	
-	// My invention which merges multiple reRun report and scenarios in a single report. this feature is still under work!************************************************
+	// My innovation which merges multiple reRun report and scenarios in a single report. this feature is still under work!************************************************
 	
 	public static ExtentTest createOrGetTest(String scenarioName) {
         if (!testMap.containsKey(scenarioName)) {

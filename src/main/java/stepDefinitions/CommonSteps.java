@@ -20,6 +20,11 @@ public class CommonSteps {
         SeleniumUtils.extentReportComment(comment, "Yellow");
     }
 	
+	@When("generate page class")
+	public void generate_page_class() {
+		commonPage.pageGeneration();
+	}
+	
 	
 	@When("user retrieve {string} field on {string} page and save in dynamic variable {string}")
 	public void user_retrieve_field_on_page_and_save_in_dynamic_variable(String fieldName, String PageName, String variableName) {
@@ -41,5 +46,6 @@ public class CommonSteps {
 		commonPage.clickOnlink(linkName);
 		WrappedReportLogger.trace("user clicked on "+linkName+" link on "+pageName+" page!!!!!");
 	}
+	
 
 }

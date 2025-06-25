@@ -9,7 +9,7 @@ public class RecursiveExecution {
 	
 	private static Properties prop = ConfigurationManager.init_prop();
 
-	// My invention which lets your failed scenarios to run automatically************************************************
+	// My innovation which lets your failed scenarios to run automatically************************************************
 
 	public static void main(String[] arg) {
 

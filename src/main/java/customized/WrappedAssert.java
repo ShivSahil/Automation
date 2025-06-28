@@ -10,24 +10,6 @@ import report.ExtentFactory;
 public class WrappedAssert {
 
 	
-
-//	public static void assertVerifyTrue(boolean condition, String message) {
-//
-//		try {
-//			Assert.assertTrue(condition, message);
-//			WrappedReportLogger.info("[VERIFICATION - PASS] " + message );
-//
-//		} catch (AssertionError e) { // see warn has been used below
-//			WrappedReportLogger.warn("[VERIFICATION - FAIL] " + message);
-//		}
-//
-//	}
-
-	
-//  Things leftout:-
-	// 1. all verification, above is an example
-	// 2. assertNot, assertNull, assertSame, assetNotSame, assertContains, below is an example
-	
 	public static void assertTrue(boolean condition, String message) {
 
 		try {
@@ -77,5 +59,22 @@ public class WrappedAssert {
 		}
 	}
 
+
+//	public static void assertVerifyTrue(boolean condition, String message) {
+//
+//		try {
+//			Assert.assertTrue(condition, message);
+//			WrappedReportLogger.info("[VERIFICATION - PASS] " + message );
+//
+//		} catch (AssertionError e) { // see warn has been used below
+//			WrappedReportLogger.warn("[VERIFICATION - FAIL] " + message);
+//		}
+//
+//	}
+
+	
+//  Things leftout:-
+	// 1. all verification, above is an example
+	// 2. assertNot, assertNull, assertSame, assetNotSame, assertContains, below is an example
 
 }

@@ -12,9 +12,9 @@ public class CommonSteps {
 	CommonPage commonPage= new CommonPage(BrowserFactory.getDriver());
 	
 	// i have skipped common steps like entering credentials,clicking on actions button, delete button etc etc
+	// note: all the step defs will have lower letter except for comment step def
 	
 	
-	// all the step defs will have lower letter except for comment step def
 	@Given("COMMENT:{string}")
 	public void log_comment_to_extent_report(String comment) {
         SeleniumUtils.extentReportComment(comment, "Yellow");
@@ -25,7 +25,7 @@ public class CommonSteps {
 		commonPage.pageGeneration();
 	}
 	
-	
+	// innovation: which sets dynamic variables in feature file
 	@When("user retrieve {string} field on {string} page and save in dynamic variable {string}")
 	public void user_retrieve_field_on_page_and_save_in_dynamic_variable(String fieldName, String PageName, String variableName) {
 		WrappedReportLogger.trace("user retrieving "+fieldName+" field on "+PageName+" page and save in dynamic variable "+variableName+".....");

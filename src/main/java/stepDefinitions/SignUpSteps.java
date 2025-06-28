@@ -18,7 +18,6 @@ public class SignUpSteps {
 	    signUpPage.setSignUpPage(signUpData);
 	    WrappedReportLogger.trace("user entered details on signing up is easy page!!!!!");
 	}
-
 }
 
 

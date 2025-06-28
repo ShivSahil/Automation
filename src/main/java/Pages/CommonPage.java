@@ -30,13 +30,7 @@ public class CommonPage {
 		By elementFieldLocator= By.xpath("//*[normalize-space(text())='"+fieldName+"']//following::td");
 		String capturedValue=SeleniumUtils.getElementText(driver, elementFieldLocator, 30, fieldName);
 		getThreadSafeMap().put(variableName, capturedValue);
-			// need to write code to handle addition, subtraction etc
-			//		if(capturedValue.startsWith("$")) {  // value is stored as 1243.65 without any $ ,
-			//			getThreadSafeMap().put(variableName, TestUtils.parseToBigDecimal(capturedValue));
-			//		}
-			//		else {
-			//			getThreadSafeMap().put(variableName, capturedValue);
-			//       }
+			// need to write code to handle addition, subtraction using BigDecimal
 	}
 	
 	

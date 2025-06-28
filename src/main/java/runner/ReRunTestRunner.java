@@ -21,9 +21,6 @@ public class ReRunTestRunner extends AbstractTestNGCucumberTests{
 		    return super.scenarios();
 		}
 		
-		
-		
-		
 		@AfterMethod
 		public void tearDown() {
 			if(BrowserFactory.getDriver() != null) {

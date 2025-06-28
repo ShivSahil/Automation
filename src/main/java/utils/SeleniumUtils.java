@@ -21,12 +21,9 @@ import report.ExtentFactory;
 public class SeleniumUtils {
 
 	
-	// No implicitlywait is used here as it is Interference with explicitwait
+	// implicitlywait is NOT used here as it is Interference with explicitwait
 
-	// Since i was short on time. I have not wrote: select by visible Text, Select by Index, getCheckBoxStatus, waitForPageLoadElementToDisappear
-	// setRadioboxStatus, getRadoboxStatus
-	// isEnabled, isElementAvailable, getAttribute, getTagName, getDropDownOptions,
-	// getTextBoxValue, hoverAndClick etc etc
+	// Since i was short on time. I have not wrote: select by visible Text, Select by Index, getCheckBoxStatus, waitForPageLoadElementToDisappear,  setRadioboxStatus, getRadoboxStatus,  isEnabled, isElementAvailable, getAttribute, getTagName, getDropDownOptions, getTextBoxValue, hoverAndClick etc etc
 	
 	private static Properties prop = ConfigurationManager.init_prop();
 
@@ -45,10 +42,14 @@ public class SeleniumUtils {
 		}
 	}
 
-	public static WebElement getElement(WebDriver driver, By locator, int timeout, String fieldName) {
+	public static WebElement getElement(WebDriver driver, By locator, int timeout, String fieldName, boolean bolElementToBeClickable) {
 		try {
-			//return new WebDriverWait(driver, timeout).until(ExpectedConditions.elementToBeClickable(locator));
-			return new WebDriverWait(driver, timeout).until(ExpectedConditions.visibilityOfElementLocated(locator));
+			
+			if (bolElementToBeClickable) {
+				return new WebDriverWait(driver, timeout).until(ExpectedConditions.elementToBeClickable(locator));
+			} else {
+				return new WebDriverWait(driver, timeout).until(ExpectedConditions.visibilityOfElementLocated(locator));
+			}
 		} catch (Exception e) {
 			WrappedReportLogger.error("Unable to find '" + fieldName + "' with locator '" + locator + "'");
 			Assert.fail("Unable to find '" + fieldName + "' with locator '" + locator + "'");
@@ -59,8 +60,7 @@ public class SeleniumUtils {
 	public static void highlighterMethod(WebDriver driver, WebElement element) throws InterruptedException {
 		try {
 			if (prop.getProperty("visualHighlightingEnabled").equalsIgnoreCase("yes")) {
-				// this is good way to highlight but below implementation is better than
-				//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+				// this is good way to highlight but below implementation is better than ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", element);
 				((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute('style','border:2px solid green;');", element);
 				Thread.sleep(300);
@@ -74,7 +74,7 @@ public class SeleniumUtils {
 	public static void setTextEntry(WebDriver driver, By locator, String textValue, int timeOut, String fieldName) {
 
 		try {
-			WebElement element = getElement(driver, locator, timeOut, fieldName);
+			WebElement element = getElement(driver, locator, timeOut, fieldName, true);
 			highlighterMethod(driver, element);
 			
 			// My innovation; these @field lets you get data on demand directly on feature file************************************************
@@ -119,9 +119,6 @@ public class SeleniumUtils {
 				element.sendKeys(textValue);
 			}
 			
-//			else if (textValue.equalsIgnoreCase("@sendNoAdditionalData")) {
-//				element.sendKeys("");
-//			} 
 			else {
 				element.clear();
 				element.sendKeys(textValue);
@@ -143,15 +140,12 @@ public class SeleniumUtils {
 
 	public static void selectByValue(WebDriver driver, By locator, String value, int timeout, String fieldName) {
 		try {
-			WebElement element = getElement(driver, locator, timeout, fieldName);
+			WebElement element = getElement(driver, locator, timeout, fieldName, true);
 			highlighterMethod(driver, element);
 			Select select = new Select(element);
 
-//			if (value.equalsIgnoreCase("@sendNoAdditionalData")) {
-//				select.selectByValue("");
-//			} else {
-				select.selectByValue(value);
-			//}
+			select.selectByValue(value);
+			
 			WrappedReportLogger.debug("Selected '" + value + "' value from dropdown '" + fieldName + "'");
 			ExtentFactory.getInstance().getExtentTest().log(Status.PASS,
 					"Selected '" + value + "' value from dropdown '" + fieldName + "'");
@@ -168,7 +162,7 @@ public class SeleniumUtils {
 	public static void click(WebDriver driver, By locator, int timeOut, String fieldName) {
 
 		try {
-			WebElement element = getElement(driver, locator, timeOut, fieldName);
+			WebElement element = getElement(driver, locator, timeOut, fieldName, true);
 			highlighterMethod(driver, element);
 			element.click();
 			WrappedReportLogger.debug("Clicks on '" + fieldName + "' button/link");
@@ -186,14 +180,15 @@ public class SeleniumUtils {
 	//************************************************
 	   
 	public static void checkBoxElementAction(WebDriver driver, By locator, String fieldName, int timeOut, String inputValue) {
+		// locator is checkbox label & not checkbox square input button
 		try {
-			WebElement element = getElement(driver, locator, timeOut, fieldName);
+			WebElement element = getElement(driver, locator, timeOut, fieldName, true);
 		    highlighterMethod(driver, element);
 		    
 		 // write custom method according to AUT
 		    if(inputValue.equalsIgnoreCase("uncheck") && getAttribute(driver, locator, "class", timeOut, fieldName).toLowerCase().contains("selected")) {
 		    	String updatedLocator=locator.toString().split("xpath:")[1].trim();
-		    	By finalLocator= By.xpath(updatedLocator+"//parent::div");
+		    	By finalLocator= By.xpath(updatedLocator+"//parent::div");   //navigating to checkbox square input button
 		    	click(driver, finalLocator, timeOut, fieldName);
 		    	WrappedReportLogger.debug("Checkbox named '"+fieldName+"' is '"+inputValue+"ed'");
 				ExtentFactory.getInstance().getExtentTest().log(Status.PASS, "Checkbox named '"+fieldName+"' is '"+inputValue+"ed'");
@@ -201,7 +196,7 @@ public class SeleniumUtils {
 		    else if(inputValue.equalsIgnoreCase("check") && getAttribute(driver, locator, "class", timeOut, fieldName).toLowerCase().contains("unselected")) 
 		    	{	
 		    	String updatedLocator=locator.toString().split("xpath:")[1].trim();
-		    	By finalLocator= By.xpath(updatedLocator+"//parent::div");
+		    	By finalLocator= By.xpath(updatedLocator+"//parent::div");  //navigating to checkbox square input button
 		    	click(driver, finalLocator, timeOut, fieldName);
 		    	WrappedReportLogger.debug("Checkbox named '"+fieldName+"' is '"+inputValue+"ed'");
 				ExtentFactory.getInstance().getExtentTest().log(Status.PASS, "Checkbox named '"+fieldName+"' is '"+inputValue+"ed'");
@@ -217,7 +212,7 @@ public class SeleniumUtils {
 		WebElement element = null;
 		String text = null;
 		try {
-			element = getElement(driver, locator, timeout, fieldName);
+			element = getElement(driver, locator, timeout, fieldName, false);
 			highlighterMethod(driver, element);
 			text = element.getText();
 			WrappedReportLogger.debug("Text of field '" + fieldName + "' is retrieved '" + text + "'");
@@ -233,7 +228,7 @@ public class SeleniumUtils {
 	public static boolean isDisplayed(WebDriver driver, By locator, String value, int timeout, String fieldName) {
 		Boolean isDisplayed = false;
 		try {
-			WebElement element = getElement(driver, locator, timeout, fieldName);
+			WebElement element = getElement(driver, locator, timeout, fieldName, false);
 			highlighterMethod(driver, element);
 			isDisplayed = element.isDisplayed();
 			WrappedReportLogger.debug("field '" + fieldName + "' is displayed: '" + isDisplayed + "'");
@@ -251,7 +246,7 @@ public class SeleniumUtils {
 	public static String getSelectedValue(WebDriver driver, By locator, String value, int timeout, String fieldName) {
 		String selectedOption = null;
 		try {
-			WebElement element = getElement(driver, locator, timeout, fieldName);
+			WebElement element = getElement(driver, locator, timeout, fieldName, true);
 			highlighterMethod(driver, element);
 			Select select = new Select(element);
 			selectedOption = select.getFirstSelectedOption().getText();
@@ -267,31 +262,27 @@ public class SeleniumUtils {
 	public static String getAttribute(WebDriver driver, By locator, String attributeName, int timeOut, String fieldName) {
 		String attributeValue=null;
 			try {
-				attributeValue= getElement(driver, locator, timeOut, fieldName).getAttribute(attributeName);
+				attributeValue= getElement(driver, locator, timeOut, fieldName, false).getAttribute(attributeName);
 			}
 	    catch (Exception e) {
 			WrappedReportLogger.error(
 					"Unable to get attribute '" + attributeName + "' of field '"+fieldName+"' with locator '" + locator + "'");
 			Assert.fail("Unable to get attribute '" + attributeName + "' of field '"+fieldName+"' with locator '" + locator + "'");
 		}
-			
 			return attributeValue;
-			
 	}
 	
 	public static String getTagName(WebDriver driver, By locator, int timeOut, String fieldName) {
 		String tagName=null;
 			try {
-				tagName= getElement(driver, locator, timeOut, fieldName).getTagName();
+				tagName= getElement(driver, locator, timeOut, fieldName, false).getTagName();
 			}
 	    catch (Exception e) {
 			WrappedReportLogger.error(
 					"Unable to get tagName of field '"+fieldName+"' with locator '" + locator + "'");
 			Assert.fail("Unable to get tagName of field '"+fieldName+"' with locator '" + locator + "'");
 		}
-			
-			return tagName;
-			
+			return tagName;	
 	}
 	
 	

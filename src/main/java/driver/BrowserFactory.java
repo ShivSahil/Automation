@@ -22,7 +22,7 @@ public class BrowserFactory {
 	
 	// Creating a separate WebDriver instance per thread
 	// Keeping each test's WebDriver instance isolated from others
-	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
+	private static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
 	
 
 	public WebDriver init_driver(String browser) {
@@ -30,7 +30,7 @@ public class BrowserFactory {
 			setChromeDriver();
 			getDriver().manage().deleteAllCookies();
 		}
-		// My innovation which lets you run from middle of feature file************************************************
+		// My innovation: this lets you run from middle of feature file************************************************
 		else if (browser.equalsIgnoreCase("ChromeDebugger")) {
 			setChromeDebuggerDriver();
 		} 

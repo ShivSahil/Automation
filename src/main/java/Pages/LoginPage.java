@@ -27,7 +27,8 @@ public class LoginPage {
 
 	public void setLoginPage(Map<String, String> login) {
 		for (String fieldName : login.keySet()) {
-			String value = TestUtils.resolveDynamicVariableIfNeeded(login.get(fieldName));
+			String value = login.get(fieldName);
+			value = TestUtils.resolveDynamicVariableIfNeeded(value);   //this value will become key for resolveDynamicVariableIfNeeded()
 			By locator = getLocatorForField(fieldName);
 			SeleniumUtils.setTextEntry(driver, locator, value, 10, fieldName);
 		}

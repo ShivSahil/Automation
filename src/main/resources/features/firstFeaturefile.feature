@@ -30,8 +30,6 @@ Feature: parabank bank testing
       | Account Type | Balance                    | Available                  |
       | CHECKING     | var_TotalOnAccountOverview | var_TotalOnAccountOverview |
     And COMMENT:"VALIDATED ACCOUNT DETAILS PAGE"
-    
- 
  
 # My innovation; 
 # We have created many dataInputters like @randomNumber1till99 @todayDateInddMM @yesterdayDateInMM/dd/YYYY @randomDateFrom15/01/2020TillTodayInMMddYYY @randomDateFrom01/12/2020Till15/01/2029Indd-MM-YYYY @randomFirstName @randomLastName 

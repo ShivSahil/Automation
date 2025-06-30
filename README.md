@@ -1,5 +1,5 @@
 ```diff
-- **Open master branch. you are currently in main branch**
+- **Open master branch where all the code is present! you are currently in main branch**
 ```
 In framework has many utilities and I have explained all of them here:
 

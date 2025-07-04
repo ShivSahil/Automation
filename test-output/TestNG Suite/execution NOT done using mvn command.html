@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>execution NOT done using mvn command</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>2/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/2/0</td>
 </tr><tr>
-<td>Started on:</td><td>Sat Jun 21 09:28:31 IST 2025</td>
+<td>Started on:</td><td>Sat Jun 28 16:02:53 IST 2025</td>
 </tr>
-<tr><td>Total time:</td><td>7 seconds (7264 ms)</td>
+<tr><td>Total time:</td><td>43 seconds (43352 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,8 +67,8 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
-<table width='100%' border='1' class='invocation-passed'>
-<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
 <td><b>Attribute(s)</b></td>
 <td width="30%"><b>Exception</b></td>
@@ -76,15 +76,39 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='runner.ReRunTestRunner.runScenario()'><b>runScenario</b><br>Test class: runner.ReRunTestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "sceario 3", "Title of your feature"</td>
-<td></td>
-<td>7</td>
-<td>runner.ReRunTestRunner@1bf320b6</td></tr>
+<td title='runner.ReRunTestRunner.runScenario()'><b>runScenario</b><br>Test class: runner.ReRunTestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "US12345|User_Validating_Existing_Customer_Creation", "parabank bank testing"</td>
+<td><div><pre>java.lang.AssertionError: Unable to find &apos;13677&apos; with locator &apos;By.linkText: 13677&apos;
+	at utils.SeleniumUtils.getElement(SeleniumUtils.java:55)
+	at utils.SeleniumUtils.click(SeleniumUtils.java:165)
+	at Pages.CommonPage.clickOnlink(CommonPage.java:51)
+	at stepDefinitions.CommonSteps.user_clicks_on_link_on_page(CommonSteps.java:46)
+	at ✽.user clicks on &quot;13677&quot; link on &quot;Account Overview&quot; page(classpath:features//firstFeaturefile.feature:27)
+... Removed 1 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace428483600", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace428483600'><pre>java.lang.AssertionError: Unable to find &apos;13677&apos; with locator &apos;By.linkText: 13677&apos;
+	at org.testng.Assert.fail(Assert.java:111)
+	at utils.SeleniumUtils.getElement(SeleniumUtils.java:55)
+	at utils.SeleniumUtils.click(SeleniumUtils.java:165)
+	at Pages.CommonPage.clickOnlink(CommonPage.java:51)
+	at stepDefinitions.CommonSteps.user_clicks_on_link_on_page(CommonSteps.java:46)
+	at ✽.user clicks on &quot;13677&quot; link on &quot;Account Overview&quot; page(classpath:features//firstFeaturefile.feature:27)
+</pre></div></td>
+<td>42</td>
+<td>runner.ReRunTestRunner@1cdf61ea</td></tr>
 <tr>
-<td title='runner.ReRunTestRunner.runScenario()'><b>runScenario</b><br>Test class: runner.ReRunTestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "sceario 1", "Title of your feature"</td>
-<td></td>
-<td>6</td>
-<td>runner.ReRunTestRunner@1bf320b6</td></tr>
+<td title='runner.ReRunTestRunner.runScenario()'><b>runScenario</b><br>Test class: runner.ReRunTestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "US98765|User_Validating_New_Customer_Creation", "parabank bank testing"</td>
+<td><div><pre>java.lang.AssertionError: [VERIFICATION - FAIL] validating title. EXPECTED [Welcome shivsahilguleri]  ACTUAL [Signing up is easy!]
+	at customized.WrappedAssert.assertEquals(WrappedAssert.java:58)
+	at stepDefinitions.LandingSteps.user_validating_userid_on_login_page(LandingSteps.java:18)
+	at ✽.user validating userid &quot;shivsahilguleri&quot; is present on login page(classpath:features//firstFeaturefile.feature:14)
+... Removed 1 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace951354250", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace951354250'><pre>java.lang.AssertionError: [VERIFICATION - FAIL] validating title. EXPECTED [Welcome shivsahilguleri]  ACTUAL [Signing up is easy!]
+	at org.testng.Assert.fail(Assert.java:111)
+	at customized.WrappedAssert.assertEquals(WrappedAssert.java:58)
+	at stepDefinitions.LandingSteps.user_validating_userid_on_login_page(LandingSteps.java:18)
+	at ✽.user validating userid &quot;shivsahilguleri&quot; is present on login page(classpath:features//firstFeaturefile.feature:14)
+</pre></div></td>
+<td>18</td>
+<td>runner.ReRunTestRunner@1cdf61ea</td></tr>
 </table><p>
 </body>
 </html>

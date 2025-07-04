@@ -3,15 +3,14 @@
 <suite parallel="tests" data-provider-thread-count="5" name="Failed suite [TestNG Suite]">
   <test thread-count="5" parallel="tests" name="execution NOT done using mvn command(failed)">
     <classes>
-      <class name="runner.TestRunner">
+      <class name="runner.ReRunTestRunner">
         <methods>
           <include name="setUpClass"/>
           <include name="tearDown"/>
-          <include name="runScenario" invocation-numbers="0 2"/>
           <include name="tearDownClass"/>
-          <include name="setUpClass"/>
+          <include name="runScenario" invocation-numbers="0 1"/>
         </methods>
-      </class> <!-- runner.TestRunner -->
+      </class> <!-- runner.ReRunTestRunner -->
     </classes>
   </test> <!-- execution NOT done using mvn command(failed) -->
 </suite> <!-- Failed suite [TestNG Suite] -->

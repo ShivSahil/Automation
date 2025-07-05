@@ -1,6 +1,7 @@
 package hooks;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -52,7 +53,7 @@ public class ApplicationHooks {
 	}
 
 	@Before(order = 4)
-	public void launchTheBrowser(Scenario scenario) {
+	public void launchTheBrowser(Scenario scenario) throws MalformedURLException {
 		browserfactory = new BrowserFactory();
 		WrappedReportLogger.trace("STARTING TEST SCENARIO : " + scenario.getName().toUpperCase());
 		if (prop.getProperty("enableChromeDebugger").equalsIgnoreCase("yes")) {

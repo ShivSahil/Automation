@@ -1,11 +1,14 @@
 package driver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 
 import com.aventstack.extentreports.Status;
@@ -14,6 +17,7 @@ import configuration.ConfigurationManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import logging.WrappedReportLogger;
 import report.ExtentFactory;
+
 
 public class BrowserFactory {
 
@@ -25,9 +29,14 @@ public class BrowserFactory {
 	private static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
 	
 
-	public WebDriver init_driver(String browser) {
+	public WebDriver init_driver(String browser) throws MalformedURLException {
 		if (browser.equalsIgnoreCase("Chrome")) {
 			setChromeDriver();
+			getDriver().manage().deleteAllCookies();
+		}
+		
+		else if (browser.equalsIgnoreCase("RemoteChrome")) {
+			setRemoteChromeDriver();
 			getDriver().manage().deleteAllCookies();
 		}
 		// My innovation: this lets you run from middle of feature file************************************************
@@ -78,6 +87,19 @@ public class BrowserFactory {
 		tlDriver.set(driver);
 		getDriver().manage().window().maximize();
 		WrappedReportLogger.trace("Started Chrome Browser");
+		ExtentFactory.getInstance().getExtentTest().log(Status.PASS, "Started Chrome Browser");
+	}
+	
+	public void setRemoteChromeDriver() throws MalformedURLException {
+		WrappedReportLogger.trace("Starting Remote Chrome Browser");
+		//WebDriverManager.chromedriver().setup();
+		System.setProperty("webdriver.chrome.silentOutput", "true");
+		ChromeOptions options = new ChromeOptions();
+
+        WebDriver driver = new RemoteWebDriver(new URL(prop.getProperty("seleniumGridAddress")), options);
+        tlDriver.set(driver);
+        getDriver().manage().window().maximize();
+        WrappedReportLogger.trace("Started Remote Chrome Browser");
 		ExtentFactory.getInstance().getExtentTest().log(Status.PASS, "Started Chrome Browser");
 	}
 

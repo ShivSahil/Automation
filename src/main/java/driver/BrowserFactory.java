@@ -106,7 +106,7 @@ public class BrowserFactory {
 	public void setHeadlessChromeDriver() {
 		WrappedReportLogger.trace("Starting Headless Chrome Browser");
 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("headless");
+		options.addArguments("--headless=new");
 		WebDriverManager.chromedriver().setup();
 		System.setProperty("webdriver.chrome.silentOutput", "true");
 		tlDriver.set(new ChromeDriver(options));
